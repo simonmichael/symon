@@ -11,8 +11,10 @@ homepage: https://github.com/simonmichael/symon
 
 dependencies:
 - base >=4.7 && <5
+- ansi-terminal
 - monad-loops
 - random
+#- unix
 
 executables:
   symon:
