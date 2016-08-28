@@ -1,13 +1,13 @@
 name: symon
-version: '0.1.0.0'
-synopsis: Simple project template from stack
-description: Please see README.md
+version: '0.1'
+synopsis: Minimal implementation(s) of the classic electronic memory game.
+#description: Please see README.md
 category: Development
 author: Simon Michael
 maintainer: simon@joyful.com
 copyright: ! 'Copyright: (c) 2016 Simon Michael'
 license: GPL-3
-#homepage: https://github.com/simonmichael/symon#readme
+homepage: https://github.com/simonmichael/symon
 
 dependencies:
 - base >=4.7 && <5
