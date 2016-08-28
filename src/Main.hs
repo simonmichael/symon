@@ -32,7 +32,7 @@ import Data.Maybe
 import System.Console.ANSI
 import System.Exit
 import System.IO
-import System.Posix.Terminal
+-- import System.Posix.Terminal
 import System.Random
 import System.Timeout
 
