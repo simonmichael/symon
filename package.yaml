@@ -14,7 +14,6 @@ dependencies:
 - ansi-terminal
 - monad-loops
 - random
-#- unix
 
 executables:
   symon:

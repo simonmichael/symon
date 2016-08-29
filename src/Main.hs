@@ -13,11 +13,7 @@ package cleanup, docs, publishing  .
 discussion  .
 show one number at a time  .
 read numbers with timeout  .
-rendering improvements  ..
-
-Issues:
-Why does rendering work as intended in GHCI but not when compiled ?
-Avoid showing multiple digits after rapid keypresses - how to disable terminal echo ?
+rendering improvement, terminal mode issues  ....
 
 -}
 
@@ -32,7 +28,6 @@ import Data.Maybe
 import System.Console.ANSI
 import System.Exit
 import System.IO
--- import System.Posix.Terminal
 import System.Random
 import System.Timeout
 
@@ -40,18 +35,24 @@ type Tone = Int  -- 1 to 4
 
 main :: IO ()
 main = do
+  hideCursor
+  hSetEcho stdin False
+--   putStrLn "pausing for 5, hit ctrl-c to exit early" >> threadDelay 5000000
+--   putStrLn "exiting normally" >> exitSuccess
+  hSetBuffering stdin NoBuffering
+  hSetBuffering stdout NoBuffering
   game
+  showCursor
+  hSetEcho stdin True
 
 game = do
-  hSetBuffering stdout NoBuffering
-  hideCursor
   g <- newStdGen
   let seq = take 10 $ randomRs (1,4::Tone) g
   userseq <- flip takeWhileM [1..length seq] $ \n -> do
     let seqsofar = take n seq
     setCursorColumn 0
     clearLine
-    threadDelay 1000000
+    threadDelay 500000
     playTones seqsofar
     ss <- getTones n
     return $ ss == map show seqsofar
@@ -65,10 +66,10 @@ playTones ts = do
   forM_ ts $ \tone -> do
     setCursorColumn 0
     putStr $ show tone
-    threadDelay 1000000
+    threadDelay 500000
     clearLine
     setCursorColumn 0
-    threadDelay 500000
+    threadDelay 400000
 
 getTones :: Int -> IO [String]
 getTones n = do
@@ -82,5 +83,4 @@ getTones n = do
     clearLine
     return c
   return $ map fromJust $ takeWhile isJust $ map ((:"") <$>) cs
-
 
