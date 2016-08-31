@@ -14,6 +14,8 @@ discussion  .
 show one number at a time  .
 read numbers with timeout  .
 rendering improvement, terminal mode issues  ....
+readme  ..
+
 
 -}
 

@@ -1,7 +1,14 @@
 name: symon
 version: '0.1'
 synopsis: Minimal implementation(s) of the classic electronic memory game.
-#description: Please see README.md
+description: |
+  This was an attempt to submit a ludum dare entry in 2h.
+  It is also a nice kata (exercise) for practising haskell game development.
+  And could be used to demonstrate different libraries and approaches.
+
+  Currently there is one implementation, a simple ansi command line one.
+  Improvements, new implementations and project collaborators are welcome.
+
 category: Development
 author: Simon Michael
 maintainer: simon@joyful.com
