@@ -10,7 +10,7 @@ description: |
   Currently there is one implementation, a minimal ansi command line one.
   See README for more.
 
-category: Development
+category: Game
 author: Simon Michael
 maintainer: simon@joyful.com
 copyright: ! 'Copyright: (c) 2016 Simon Michael'

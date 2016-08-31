@@ -17,7 +17,7 @@ rendering improvement, terminal mode issues  ....
 readme, description  ...
 rename  .
 restore terminal  .
-release, cleanup  .
+release, cleanup  ..
 
 -}
 
