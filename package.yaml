@@ -3,11 +3,12 @@ version: '0.1'
 synopsis: Minimal implementation(s) of the classic electronic memory game.
 description: |
   This was an attempt to submit a ludum dare entry in 2h.
-  It is also a nice kata (exercise) for practising haskell game development.
-  And could be used to demonstrate different libraries and approaches.
+  It is also a nice kata (exercise) for practising haskell game development
+  and/or demonstrating different libraries and approaches.
+  Improvements, new implementations and co-developers are welcome.
 
-  Currently there is one implementation, a simple ansi command line one.
-  Improvements, new implementations and project collaborators are welcome.
+  Currently there is one implementation, a minimal ansi command line one.
+  See README for more.
 
 category: Development
 author: Simon Michael
@@ -22,7 +23,8 @@ dependencies:
 - monad-loops
 - random
 
+source-dirs: src
+
 executables:
-  symon:
-    main: Main.hs
-    source-dirs: src
+  symon-ansi:
+    main: symon-ansi.hs
