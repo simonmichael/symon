@@ -2,25 +2,29 @@
 --
 -- see: https://github.com/sol/hpack
 
-name:                symon
-version:             0.1
-synopsis:            Minimal implementation(s) of the classic electronic memory game.
-description:         This was an attempt to submit a ludum dare entry in 2h.
-                     It is also a nice kata (exercise) for practising haskell game development
-                     and/or demonstrating different libraries and approaches.
-                     Improvements, new implementations and co-developers are welcome.
-                     .
-                     Currently there is one implementation, a minimal ansi command line one.
-                     See README for more.
-category:            Development
-license:             GPL-3
-license-file:        LICENSE
-author:              Simon Michael
-maintainer:          simon@joyful.com
-copyright:           Copyright: (c) 2016 Simon Michael
-homepage:            https://github.com/simonmichael/symon
-build-type:          Simple
-cabal-version:       >= 1.10
+name:           symon
+version:        0.1
+synopsis:       Minimal implementation(s) of the classic electronic memory game.
+description:    This was an attempt to submit a ludum dare entry in 2h.
+                It is also a nice kata (exercise) for practising haskell game development
+                and/or demonstrating different libraries and approaches.
+                Improvements, new implementations and co-developers are welcome.
+                .
+                Currently there is one implementation, a minimal ansi command line one.
+                See README for more.
+category:       Development
+homepage:       https://github.com/simonmichael/symon
+author:         Simon Michael
+maintainer:     simon@joyful.com
+copyright:      Copyright: (c) 2016 Simon Michael
+license:        GPL-3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    CHANGES
+    README.md
 
 executable symon-ansi
   main-is: symon-ansi.hs
