@@ -1,5 +1,5 @@
 {-
-symon - minimal version of the classic electronic memory game
+symon-ansi - minimal version of the classic electronic memory game
 using only standard libs; command line, no sound.
 
 This was an attempt to submit a ludum dare entry in 2h.
@@ -14,7 +14,8 @@ discussion  .
 show one number at a time  .
 read numbers with timeout  .
 rendering improvement, terminal mode issues  ....
-readme  ..
+readme, description  ...
+rename  .
 
 
 -}
@@ -44,8 +45,12 @@ main = do
   hSetBuffering stdin NoBuffering
   hSetBuffering stdout NoBuffering
   game
+  restoreAndExit
+
+restoreAndExit = do
   showCursor
   hSetEcho stdin True
+  exitSuccess
 
 game = do
   g <- newStdGen
@@ -77,6 +82,7 @@ getTones :: Int -> IO [String]
 getTones n = do
   cs <- forM [1..n] $ \_ -> do
     c <- timeout 5000000 getChar
+    when (c==Just 'q') $ restoreAndExit
     setCursorColumn 0
     clearLine
     putStr $ (fromMaybe ' ' c):""

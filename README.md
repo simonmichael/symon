@@ -14,3 +14,6 @@ $ symon-ansi
 A sequence of digits is displayed repeatedly, growing each time;
 enter the same digits before time's up to keep playing.
 Can you beat it ?
+
+If you exit with ctrl-c, you may need to "reset" the terminal 
+(use q to quit cleanly).
