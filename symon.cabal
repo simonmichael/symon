@@ -12,7 +12,7 @@ description:    This was an attempt to submit a ludum dare entry in 2h.
                 .
                 Currently there is one implementation, a minimal ansi command line one.
                 See README for more.
-category:       Development
+category:       Game
 homepage:       https://github.com/simonmichael/symon
 author:         Simon Michael
 maintainer:     simon@joyful.com
