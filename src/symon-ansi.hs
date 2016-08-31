@@ -20,8 +20,6 @@ restore terminal  .
 
 -}
 
--- {-# LANGUAGE DeriveAnyClass #-}
-
 module Main where
 
 import Control.Concurrent
@@ -38,13 +36,11 @@ import System.Timeout
 type Tone = Int  -- 1 to 4
 
 main :: IO ()
-main = bracket setupTerminal (const restoreTerminal) (const game)
+main = bracket setupTerminal (const restoreTerminal) (const runGame)
 
 setupTerminal = do
   hideCursor
   hSetEcho stdin False
---   putStrLn "pausing for 5, hit ctrl-c to exit early" >> threadDelay 5000000
---   putStrLn "exiting normally" >> exitSuccess
   hSetBuffering stdin NoBuffering
   hSetBuffering stdout NoBuffering
 
@@ -52,7 +48,7 @@ restoreTerminal = do
   showCursor
   hSetEcho stdin True
 
-game = do
+runGame = do
   g <- newStdGen
   let seq = take 10 $ randomRs (1,4::Tone) g
   userseq <- flip takeWhileM [1..length seq] $ \n -> do
@@ -63,6 +59,9 @@ game = do
     playTones seqsofar
     ss <- getTones n
     return $ ss == map show seqsofar
+  showScore seq userseq
+
+showScore seq userseq = do
   let score = length userseq
   putStrLn $ "Your score: " ++ show score
   if (score == length seq)
