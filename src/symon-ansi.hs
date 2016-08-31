@@ -16,7 +16,7 @@ read numbers with timeout  .
 rendering improvement, terminal mode issues  ....
 readme, description  ...
 rename  .
-
+restore terminal  .
 
 -}
 
@@ -25,6 +25,7 @@ rename  .
 module Main where
 
 import Control.Concurrent
+import Control.Exception
 import Control.Monad
 import Control.Monad.Loops
 import Data.Maybe
@@ -37,20 +38,19 @@ import System.Timeout
 type Tone = Int  -- 1 to 4
 
 main :: IO ()
-main = do
+main = bracket setupTerminal (const restoreTerminal) (const game)
+
+setupTerminal = do
   hideCursor
   hSetEcho stdin False
 --   putStrLn "pausing for 5, hit ctrl-c to exit early" >> threadDelay 5000000
 --   putStrLn "exiting normally" >> exitSuccess
   hSetBuffering stdin NoBuffering
   hSetBuffering stdout NoBuffering
-  game
-  restoreAndExit
 
-restoreAndExit = do
+restoreTerminal = do
   showCursor
   hSetEcho stdin True
-  exitSuccess
 
 game = do
   g <- newStdGen
@@ -65,9 +65,11 @@ game = do
     return $ ss == map show seqsofar
   let score = length userseq
   putStrLn $ "Your score: " ++ show score
-  when (score == length seq) $
+  if (score == length seq)
+  then
     putStrLn "You won! Congratulations."
-  showCursor
+  else
+    putStrLn "Better luck next time."
 
 playTones ts = do
   forM_ ts $ \tone -> do
@@ -82,7 +84,7 @@ getTones :: Int -> IO [String]
 getTones n = do
   cs <- forM [1..n] $ \_ -> do
     c <- timeout 5000000 getChar
-    when (c==Just 'q') $ restoreAndExit
+    when (c==Just 'q') $ restoreTerminal >> exitSuccess
     setCursorColumn 0
     clearLine
     putStr $ (fromMaybe ' ' c):""
