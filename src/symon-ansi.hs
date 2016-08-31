@@ -61,15 +61,6 @@ runGame = do
     return $ ss == map show seqsofar
   showScore seq userseq
 
-showScore seq userseq = do
-  let score = length userseq
-  putStrLn $ "Your score: " ++ show score
-  if (score == length seq)
-  then
-    putStrLn "You won! Congratulations."
-  else
-    putStrLn "Better luck next time."
-
 playTones ts = do
   forM_ ts $ \tone -> do
     setCursorColumn 0
@@ -92,4 +83,13 @@ getTones n = do
     clearLine
     return c
   return $ map fromJust $ takeWhile isJust $ map ((:"") <$>) cs
+
+showScore seq userseq = do
+  let score = length userseq
+  putStrLn $ "Your score: " ++ show score
+  if (score == length seq)
+  then
+    putStrLn "You won! Congratulations."
+  else
+    putStrLn "Better luck next time."
 
