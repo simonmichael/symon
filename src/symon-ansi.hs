@@ -25,6 +25,7 @@ discussion  .
 
 2016/9
 refactor  .
+rendering  .
 
 -}
 
@@ -42,6 +43,8 @@ import System.Random
 import System.Timeout
 
 type Tone = Char -- '1' to '4'
+tfirst = '1'
+tlast = '4'
 
 main :: IO ()
 main = bracket setupTerminal (const restoreTerminal) (const runGame)
@@ -58,7 +61,7 @@ restoreTerminal = do
 
 runGame = do
   g <- newStdGen
-  let seq = take 10 $ randomRs ('1','4'::Tone) g
+  let seq = take 10 $ randomRs (tfirst,tlast) g
   userseq <- flip takeWhileM [1..length seq] $ \n -> do
     let seqsofar = take n seq
     playSilence 400000
@@ -82,14 +85,22 @@ getTones n = do
     return c
   return $ map fromJust $ takeWhile isJust cs
 
-playTone tone interval = do
+playSilence interval = do
   setCursorColumn 0
-  putChar tone
+  forM_ [tfirst..tlast] $ \t -> putChar t
   threadDelay interval
 
-playSilence interval = do
-  clearLine
+playTone tone interval = do
   setCursorColumn 0
+  forM_ [tfirst..tlast] $ \t ->
+    if t == tone
+    then do
+--       setSGR [SetColor Foreground Vivid Red]
+      setSGR [SetColor Foreground Vivid Red]
+      putChar t
+      setSGR [SetColor Foreground Dull Black]
+    else do
+      putChar t
   threadDelay interval
 
 showScore seq userseq = do
