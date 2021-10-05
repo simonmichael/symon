@@ -7,10 +7,10 @@ It is also a nice kata (exercise) for practising haskell game development
 and/or demonstrating different libraries and approaches.
 Improvements, new implementations and co-developers are welcome.
 
-Currently there is one implementation, a minimal ansi command line one.
+Currently there is one implementation, `symon-ansi`.
 
 ```shell
-$ symon-ansi
+$ stack run
 ```
 
 A sequence of digits is displayed repeatedly, growing each time;
